@@ -1,0 +1,30 @@
+<p>nested-dynamic-form works!</p>
+<form [formGroup]="nestedDynamicForm">
+  <ng-container formArrayName="users">
+    <ng-container *ngFor="let user of users.controls; index as index">
+      <ng-container  [formGroupName]="index">
+        <mat-form-field>
+          <mat-label>Enter your First Name</mat-label>
+          <input matInput placeholder="e.g. Joey" formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your Last Name</mat-label>
+          <input
+            matInput
+            placeholder="e.g. Tribbiani"
+            formControlName="lastName"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Enter your Date of Birth</mat-label>
+          <input matInput placeholder="e.g. 01/09/1968" formControlName="dob" />
+        </mat-form-field>
+        <button mat-raised-button color="warn" (click)="deleteUser(index)">
+          Delete User
+        </button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <button mat-raised-button color="accent" (click)="addUser()">Add User</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+</form>
